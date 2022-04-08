@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   getRandomJoke: () => {},
+  getNewJoke: () => {},
 };
 export const chuckSlice = createSlice({
   name: "chuck",
@@ -16,5 +17,5 @@ export const chuckSlice = createSlice({
   },
 });
 
-export const { setJoke, getRandomJoke } = chuckSlice.actions;
+export const { setJoke, getRandomJoke, getNewJoke } = chuckSlice.actions;
 export default chuckSlice.reducer;
