@@ -1,18 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTrivia, setToggledAnswers } from "../store/trivia/slice";
-import { selectToggledAnswers, selectTrivia } from "../store/trivia/selectors";
+import {
+  getCategories,
+  setToggledAnswers,
+  getClues,
+} from "../store/trivia/slice";
+import {
+  selectToggledAnswers,
+  selectCategories,
+  selectClues,
+} from "../store/trivia/selectors";
 
 function TriviaApp() {
   const dispatch = useDispatch();
-  const trivia = useSelector(selectTrivia);
+  const [category, setCategory] = useState(0);
+  const clues = useSelector(selectClues);
   const toggledAnswers = useSelector(selectToggledAnswers);
   useEffect(() => {
-    dispatch(getTrivia());
+    dispatch(getCategories());
   }, []);
+  const categories = useSelector(selectCategories);
+  useEffect(() => {
+    if (category) {
+      dispatch(getClues(category));
+    }
+  }, [category]);
   return (
     <div>
-      {trivia.map((item) => (
+      <select name='categories' onChange={(e) => setCategory(e.target.value)}>
+        <option value={null}></option>
+        {categories.map((categorie) => (
+          <option value={categorie.id}>{categorie.title}</option>
+        ))}
+      </select>
+      {clues.map((item) => (
         <ul>
           <div key={item.id}>
             <li>{item.question}</li>

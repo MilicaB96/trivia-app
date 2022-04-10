@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { StaticRouter } from "react-router-dom";
 
 const middlewareActions = {
   getTrivia: () => {},
+  getCategories: () => {},
+  getClues: () => {},
 };
 export const triviaSlice = createSlice({
   name: "trivia",
   initialState: {
-    trivia: [],
     toggledAnswers: [],
+    categories: [],
+    clues: [],
   },
   reducers: {
     setTrivia: (state, action) => {
@@ -16,9 +20,23 @@ export const triviaSlice = createSlice({
     setToggledAnswers: (state, action) => {
       state.toggledAnswers.push(action.payload);
     },
+    setCategories: (state, action) => {
+      state.categories = action.payload;
+    },
+    setClues: (state, action) => {
+      state.clues = action.payload;
+    },
     ...middlewareActions,
   },
 });
 
-export const { getTrivia, setTrivia, setToggledAnswers } = triviaSlice.actions;
+export const {
+  // getTrivia,
+  // setTrivia,
+  setToggledAnswers,
+  getCategories,
+  setCategories,
+  getClues,
+  setClues,
+} = triviaSlice.actions;
 export default triviaSlice.reducer;
