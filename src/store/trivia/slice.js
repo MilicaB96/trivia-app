@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { StaticRouter } from "react-router-dom";
 
 const middlewareActions = {
   getTrivia: () => {},
   getCategories: () => {},
   getClues: () => {},
+  filter: () => {},
 };
 export const triviaSlice = createSlice({
   name: "trivia",
@@ -12,6 +12,8 @@ export const triviaSlice = createSlice({
     toggledAnswers: [],
     categories: [],
     clues: [],
+    currentPage: 1,
+    filter: "",
   },
   reducers: {
     setTrivia: (state, action) => {
@@ -26,6 +28,17 @@ export const triviaSlice = createSlice({
     setClues: (state, action) => {
       state.clues = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      if (action.payload === "prev") {
+        state.currentPage--;
+      }
+      if (action.payload === "next") {
+        state.currentPage++;
+      }
+    },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
     ...middlewareActions,
   },
 });
@@ -38,5 +51,7 @@ export const {
   setCategories,
   getClues,
   setClues,
+  setCurrentPage,
+  setFilter,
 } = triviaSlice.actions;
 export default triviaSlice.reducer;
