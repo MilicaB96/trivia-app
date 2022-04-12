@@ -9,26 +9,19 @@ import {
 import {
   selectToggledAnswers,
   selectCategories,
-  selectClues,
   selectPage,
   selectLastPage,
-  selectFilter,
-  selectAllClues,
+  selectFilterTrivia,
 } from "../store/trivia/selectors";
 import FilterTrivia from "../components/FilterTrivia";
 
 function TriviaApp() {
   const dispatch = useDispatch();
   const [category, setCategory] = useState(0);
-  const clues = useSelector(selectClues);
   const page = useSelector(selectPage);
   const lastPage = useSelector(selectLastPage);
+  const filterClues = useSelector(selectFilterTrivia);
   const toggledAnswers = useSelector(selectToggledAnswers);
-  const filter = useSelector(selectFilter);
-  const allClues = useSelector(selectAllClues);
-  const filterClues = filter
-    ? allClues.filter((clue) => clue.question.includes(filter.toLowerCase()))
-    : clues;
   useEffect(() => {
     dispatch(getCategories());
   }, []);

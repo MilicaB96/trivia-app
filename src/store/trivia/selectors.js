@@ -1,5 +1,4 @@
 export const selectToggledAnswers = (state) => state.trivia.toggledAnswers;
-export const selectAllClues = (state) => state.trivia.clues;
 export const selectCategories = (state) => state.trivia.categories;
 export const selectPage = (state) => state.trivia.currentPage;
 export const selectLastPage = (state) =>
@@ -10,4 +9,9 @@ export const selectClues = (state) =>
     state.trivia.currentPage - 1,
     state.trivia.currentPage
   );
-export const selectFilter = (state) => state.trivia.filter;
+export const selectFilterTrivia = (state) =>
+  state.trivia.filter
+    ? state.trivia.clues.filter((clue) =>
+        clue.question.toLowerCase().includes(state.trivia.filter.toLowerCase())
+      )
+    : state.trivia.clues;
